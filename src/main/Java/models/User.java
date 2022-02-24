@@ -1,4 +1,4 @@
-package main;
+package models;
 import java.util.UUID;
 
 public class User {
@@ -9,7 +9,7 @@ public class User {
     public String firstName;
     public String lastName;
     private boolean isActive = false;
-    private int role;
+    private int role_id;
 
     public void requestRole(int requestedRole){
         //1 = admin, 2 = finance manager, 3 = regular employee
