@@ -1,4 +1,4 @@
-package models;
+package com.revature.erm.models;
 import java.util.UUID;
 
 public class User {

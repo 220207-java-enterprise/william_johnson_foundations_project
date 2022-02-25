@@ -1,4 +1,4 @@
-package models;
+package com.revature.erm.models;
 
 public class ReimbursementType {
     String id;

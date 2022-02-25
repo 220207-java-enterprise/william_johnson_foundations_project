@@ -1,4 +1,4 @@
-package models;
+package com.revature.erm.models;
 import java.time.LocalDateTime;
 import java.util.UUID;
 

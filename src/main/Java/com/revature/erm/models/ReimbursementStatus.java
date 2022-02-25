@@ -1,6 +1,6 @@
-package models;
+package com.revature.erm.models;
 
-public class ReimbursmentStatus {
+public class ReimbursementStatus {
     String id;
     String status;
 
