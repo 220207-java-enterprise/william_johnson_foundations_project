@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) {
 
-        /*String URL = "jdbc:postgresql://localhost:5432/postgres?currentSchema=foundations-project";
+        String URL = "jdbc:postgresql://localhost:5432/postgres?currentSchema=foundations-project";
         String username = "postgres";
         String password = "revature";
 
@@ -19,7 +19,7 @@ public class Main {
         } catch (SQLException e) {
             System.out.println("Error in connecting to PostgreSQL");
             e.printStackTrace();
-        }*/
+        }
 
 
         /*System.out.println("this is my project");
