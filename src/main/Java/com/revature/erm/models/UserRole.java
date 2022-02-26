@@ -1,8 +1,8 @@
 package com.revature.erm.models;
 
 public class UserRole {
-    String id;
-    String role;
+    private String id;
+    private String role;
 
     public void ReimbursementRole (String role) {
         this.role = role;

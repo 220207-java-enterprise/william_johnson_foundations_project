@@ -1,8 +1,8 @@
 package com.revature.erm.models;
 
 public class ReimbursementType {
-    String id;
-    String type;
+    private String id;
+    private String type;
 
     public void ReimbursementType (String type) {
         this.type = type;
