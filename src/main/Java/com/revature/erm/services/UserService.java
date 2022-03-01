@@ -36,7 +36,7 @@ public class UserService {
 
         // Java 8+ mapping logic (with Streams)
         return userDAO.getAll()
-                .stream()
+                .stream() //i think that i need to get save and getall in userdao working for this part to compile
                 .map(UserResponse::new)
                 .collect(Collectors.toList());
     }

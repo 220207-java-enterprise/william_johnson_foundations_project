@@ -2,6 +2,8 @@ package com.revature.erm.daos;
 
 import com.revature.erm.models.Reimbursement;
 
+import java.util.List;
+
 public class ReimbursementDAO implements CrudDAO<Reimbursement> {
 
     public void save(Reimbursement newObject) {
@@ -12,8 +14,8 @@ public class ReimbursementDAO implements CrudDAO<Reimbursement> {
         return null;
     }
 
-    public Reimbursement[] getAll() {
-        return new Reimbursement[0];
+    public List<Reimbursement> getAll() {
+        return null;
     }
 
     public void update(Reimbursement updatedObject) {

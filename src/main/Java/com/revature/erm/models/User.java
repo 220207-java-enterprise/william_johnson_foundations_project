@@ -76,6 +76,16 @@ public class User {
         this.role = role;
     }
 
+    public User(){
+        this.id = null;
+        this.username = null;
+        this.email = null;
+        this.password = null;
+        this.firstName = null;
+        this.lastName = null;
+        this.isActive = false;
+        this.role = null;
+    }
     public User(String id, String username, String email, String password,
                 String firstName, String lastName, boolean isActive, UserRole role) {
         this.id = id;

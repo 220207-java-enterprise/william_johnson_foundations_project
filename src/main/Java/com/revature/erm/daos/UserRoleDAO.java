@@ -2,6 +2,8 @@ package com.revature.erm.daos;
 
 import com.revature.erm.models.UserRole;
 
+import java.util.List;
+
 public class UserRoleDAO implements CrudDAO<UserRole> {
     public void save(UserRole newObject) {
 
@@ -11,9 +13,8 @@ public class UserRoleDAO implements CrudDAO<UserRole> {
         return null;
     }
 
-    public UserRole[] getAll() {
-        return new UserRole[0];
-    }
+    public List<UserRole> getAll() {return null;}
+
 
     public void update(UserRole updatedObject) {
 
