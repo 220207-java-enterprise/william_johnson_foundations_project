@@ -6,6 +6,9 @@ import com.revature.erm.dtos.requests.NewUserRequest;
 import com.revature.erm.dtos.responses.UserResponse;
 import com.revature.erm.models.User;
 import com.revature.erm.models.UserRole;
+import com.revature.erm.util.exceptions.AuthenticationException;
+import com.revature.erm.util.exceptions.InvalidRequestException;
+import com.revature.erm.util.exceptions.ResourceConflictException;
 
 import java.io.IOException;
 import java.util.List;
