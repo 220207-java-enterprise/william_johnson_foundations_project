@@ -9,8 +9,8 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private boolean isActive = false;
-    private int role_id;
+    private boolean isActive;
+    private String role_id;
 
     public String getId() {
         return id;
@@ -68,31 +68,33 @@ public class User {
         isActive = active;
     }
 
-    public int getRole_id() {
+    public String getRole_id() {
         return role_id;
     }
 
-    public void setRole_id(int role_id) {
+    public void setRole_id(String role_id) {
         this.role_id = role_id;
     }
 
-    public void requestRole(int requestedRole){
-        //1 = admin, 2 = finance manager, 3 = regular employee
-
-    }
-
-    public User(String username, String email, String password, String firstName, String lastName) {
-        this.id = UUID.randomUUID().toString();
+    public User(String id, String username, String email, String password,
+                String firstName, String lastName, boolean isActive, String role_id) {
+        this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.isActive = isActive;
+        this.role_id = role_id;
 
-        System.out.println(this.id);
+        //System.out.println(this.id);
     }
 
-    public RelationNotification getRole() {
-        return null;
+    public User(String firstName, String lastName, String email, String username, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 }
