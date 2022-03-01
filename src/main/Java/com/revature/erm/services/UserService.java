@@ -15,7 +15,7 @@ public class UserService {
 
     private UserDAO userDAO; // a dependency of UserService
 
-    // Constructor injection
+    /*// Constructor injection
     public UserService(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
@@ -128,5 +128,5 @@ public class UserService {
 
     public boolean isEmailAvailable(String email) {
         return userDAO.findUserByEmail(email) == null;
-    }
+    }*/
 }

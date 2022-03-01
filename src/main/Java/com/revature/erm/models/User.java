@@ -93,5 +93,6 @@ public class User {
     }
 
     public RelationNotification getRole() {
+        return null;
     }
 }
