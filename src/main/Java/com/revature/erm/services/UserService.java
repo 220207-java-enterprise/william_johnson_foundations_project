@@ -5,6 +5,7 @@ import com.revature.erm.dtos.requests.LoginRequest;
 import com.revature.erm.dtos.requests.NewUserRequest;
 import com.revature.erm.dtos.responses.UserResponse;
 import com.revature.erm.models.User;
+import com.revature.erm.models.UserRole;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,7 +16,7 @@ public class UserService {
 
     private UserDAO userDAO; // a dependency of UserService
 
-    /*// Constructor injection
+    // Constructor injection
     public UserService(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
@@ -128,5 +129,5 @@ public class UserService {
 
     public boolean isEmailAvailable(String email) {
         return userDAO.findUserByEmail(email) == null;
-    }*/
+    }
 }

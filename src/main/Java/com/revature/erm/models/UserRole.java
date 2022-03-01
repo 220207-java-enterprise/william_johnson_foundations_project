@@ -2,7 +2,7 @@ package com.revature.erm.models;
 
 public class UserRole {
     private String id;
-    private String role;
+    private String rolename;
 
     public String getId() {
         return id;
@@ -12,16 +12,16 @@ public class UserRole {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getRoleName() {
+        return rolename;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleName(String rolename) {
+        this.rolename = rolename;
     }
 
-    public UserRole(String id, String role){
+    public UserRole(String id, String rolename){
         this.id = id;
-        this.role = role;
+        this.rolename = rolename;
     }
 }
