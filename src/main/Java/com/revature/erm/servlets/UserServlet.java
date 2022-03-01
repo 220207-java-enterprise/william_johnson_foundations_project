@@ -1,17 +1,5 @@
 package com.revature.erm.servlets;
 
-/*import com.fasterxml.jackson.databind.DatabindException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.quizzard.dtos.requests.NewUserRequest;
-import com.revature.quizzard.dtos.responses.AppUserResponse;
-import com.revature.quizzard.dtos.responses.Principal;
-import com.revature.quizzard.dtos.responses.ResourceCreationResponse;
-import com.revature.quizzard.models.AppUser;
-import com.revature.quizzard.services.UserService;
-import com.revature.quizzard.util.exceptions.InvalidRequestException;
-import com.revature.quizzard.util.exceptions.ResourceConflictException;*/
-
-
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.erm.dtos.requests.NewUserRequest;

@@ -30,4 +30,18 @@ public class UserDAO implements CrudDAO<User> {
     public void deleteById(String id) {
 
     }
+
+    public User findUserByUsernameAndPassword(String username, String password) {
+
+        return null;
+    }
+
+    public User findUserByUsername(String username) {
+
+        return null;
+    }
+
+    public User findUserByEmail(String email) {
+        return null;
+    }
 }

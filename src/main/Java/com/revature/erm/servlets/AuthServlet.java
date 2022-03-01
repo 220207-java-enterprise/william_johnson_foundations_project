@@ -3,12 +3,12 @@ package com.revature.erm.servlets;
 
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-/*import com.revature.quizzard.dtos.requests.LoginRequest;
-import com.revature.quizzard.dtos.responses.Principal;
-import com.revature.quizzard.models.AppUser;
-import com.revature.quizzard.services.UserService;
-import com.revature.quizzard.util.exceptions.AuthenticationException;
-import com.revature.quizzard.util.exceptions.InvalidRequestException;*/
+import com.revature.erm.dtos.requests.LoginRequest;
+import com.revature.erm.dtos.responses.Principal;
+import com.revature.erm.models.User;
+import com.revature.erm.services.UserService;
+import com.revature.erm.util.exceptions.AuthenticationException;
+import com.revature.erm.util.exceptions.InvalidRequestException;
 
 import com.revature.erm.dtos.requests.LoginRequest;
 import com.revature.erm.dtos.responses.Principal;
