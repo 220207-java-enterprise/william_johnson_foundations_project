@@ -1,6 +1,10 @@
 package com.revature.erm.services;
 
 import com.revature.erm.daos.UserDAO;
+import com.revature.erm.dtos.requests.LoginRequest;
+import com.revature.erm.dtos.requests.NewUserRequest;
+import com.revature.erm.dtos.responses.UserResponse;
+import com.revature.erm.models.User;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,7 +20,7 @@ public class UserService {
         this.userDAO = userDAO;
     }
 
-    public List<AppUserResponse> getAllUsers() {
+    public List<UserResponse> getAllUsers() {
 
         // Pre-Java 8 mapping logic (without Streams)
 //        List<AppUser> users = userDAO.getAll();
@@ -29,13 +33,13 @@ public class UserService {
         // Java 8+ mapping logic (with Streams)
         return userDAO.getAll()
                 .stream()
-                .map(AppUserResponse::new)
+                .map(UserResponse::new)
                 .collect(Collectors.toList());
     }
 
-    public AppUser register(NewUserRequest newUserRequest) throws IOException {
+    public User register(NewUserRequest newUserRequest) throws IOException {
 
-        AppUser newUser = newUserRequest.extractUser();
+        User newUser = newUserRequest.extractUser();
 
         if (!isUserValid(newUser)) {
             throw new InvalidRequestException("Bad registration details given.");
@@ -60,7 +64,7 @@ public class UserService {
         return newUser;
     }
 
-    public AppUser login(LoginRequest loginRequest) {
+    public User login(LoginRequest loginRequest) {
 
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
@@ -71,7 +75,7 @@ public class UserService {
 
         // TODO encrypt provided password (assumes password encryption is in place) to see if it matches what is in the DB
 
-        AppUser authUser = userDAO.findUserByUsernameAndPassword(username, password);
+        User authUser = userDAO.findUserByUsernameAndPassword(username, password);
 
         if (authUser == null) {
             throw new AuthenticationException();
@@ -81,7 +85,7 @@ public class UserService {
 
     }
 
-    private boolean isUserValid(AppUser appUser) {
+    private boolean isUserValid(User appUser) {
 
         // First name and last name are not just empty strings or filled with whitespace
         if (appUser.getFirstName().trim().equals("") || appUser.getLastName().trim().equals("")) {

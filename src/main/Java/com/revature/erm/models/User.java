@@ -1,4 +1,5 @@
 package com.revature.erm.models;
+import javax.management.relation.RelationNotification;
 import java.util.UUID;
 
 public class User {
@@ -80,7 +81,7 @@ public class User {
 
     }
 
-    User (String username, String email, String password, String firstName, String lastName) {
+    public User(String username, String email, String password, String firstName, String lastName) {
         this.id = UUID.randomUUID().toString();
         this.username = username;
         this.email = email;
@@ -91,4 +92,6 @@ public class User {
         System.out.println(this.id);
     }
 
+    public RelationNotification getRole() {
+    }
 }
