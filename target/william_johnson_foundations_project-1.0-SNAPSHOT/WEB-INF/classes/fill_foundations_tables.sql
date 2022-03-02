@@ -20,9 +20,10 @@ insert into "ers_users"("user_id", "username", "email", "password", "given_name"
 select * from "ers_users";
 
 insert into "ers_reimbursment_types"("type_id", "type")
-				values ('0', 'Travel'),
-				('1', 'Training'),
-				('2', 'Paid-For Vacation');
+				values ('0', 'Lodging'),
+				('1', 'Travel'),
+				('2', 'Food'),
+				('3', 'Other');
 
 select * from "ers_reimbursment_types";
 
@@ -46,8 +47,8 @@ insert into "ers_reimbursments"("reimb_id", "amount", "submitted", "resolved",
 				values (gen_random_uuid(), 10, CURRENT_TIMESTAMP, null, 'this was for the new training program', null,
 				(select "user_id" from "ers_users" where "username" = 'old_employee'),
 				(select "user_id" from "ers_users" where "username" = 'finance_manager_1'),
-				(select "status_id" from "ers_reimbursment_statuses"  where "status_id" = '2'),
-				(select "type_id" from "ers_reimbursment_types"  where "type_id" = '1'));
+				(select "status_id" from "ers_reimbursment_statuses"  where "status_id" = '1'),
+				(select "type_id" from "ers_reimbursment_types"  where "type_id" = '3'));
 
 insert into "ers_reimbursments"("reimb_id", "amount", "submitted", "resolved",
 "description", "payment_id", "author_id", "resolver_id", "status_id", "type_id")
@@ -55,7 +56,7 @@ insert into "ers_reimbursments"("reimb_id", "amount", "submitted", "resolved",
 				(select "user_id" from "ers_users" where "username" = 'old_employee'),
 				(select "user_id" from "ers_users" where "username" = 'finance_manager_1'),
 				(select "status_id" from "ers_reimbursment_statuses"  where "status_id" = '1'),
-				(select "type_id" from "ers_reimbursment_types"  where "type_id" = '2'));
+				(select "type_id" from "ers_reimbursment_types"  where "type_id" = '3'));
 
 select * from "ers_reimbursments";
 

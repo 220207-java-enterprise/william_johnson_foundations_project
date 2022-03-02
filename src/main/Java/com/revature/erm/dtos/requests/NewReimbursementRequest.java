@@ -1,26 +1,23 @@
-package com.revature.erm.models;
-import java.time.LocalDateTime;
-import java.util.UUID;
+package com.revature.erm.dtos.requests;
 
-public class Reimbursement {
-    private String id;
+import com.revature.erm.models.ReimbursementStatus;
+import com.revature.erm.models.ReimbursementType;
+import com.revature.erm.models.User;
+
+import java.time.LocalDateTime;
+
+public class NewReimbursementRequest {
+
+    //private String id;
     private double amount;
     private LocalDateTime submitted;
-    private LocalDateTime resolved;
+    //private LocalDateTime resolved;
     private String description;
     private String payment_id;
     private User author;
     private User resolver;
     private ReimbursementStatus status;
     private ReimbursementType type;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public double getAmount() {
         return amount;
@@ -36,14 +33,6 @@ public class Reimbursement {
 
     public void setSubmitted(LocalDateTime submitted) {
         this.submitted = submitted;
-    }
-
-    public LocalDateTime getResolved() {
-        return resolved;
-    }
-
-    public void setResolved(LocalDateTime resolved) {
-        this.resolved = resolved;
     }
 
     public String getDescription() {
@@ -94,19 +83,32 @@ public class Reimbursement {
         this.type = type;
     }
 
-    Reimbursement(String id, int amount, LocalDateTime submitted, LocalDateTime resolved, String description,
-                  String payment_id, User author, User resolver, ReimbursementStatus status, ReimbursementType type) {
-        this.id = id;
+    public NewReimbursementRequest(double amount, String description, String payment_id,
+                                   User author, User resolver, ReimbursementType type){
+
         this.amount = amount;
-        this.submitted = submitted;
-        this.resolved = resolved;
         this.description = description;
         this.payment_id = payment_id;
         this.author = author;
         this.resolver = resolver;
-        this.status = status;
         this.type = type;
+        this.status = new ReimbursementStatus();
+        this.submitted = LocalDateTime.now();
 
+    }
+
+    @Override
+    public String toString() {
+        return "NewReimbursementRequest{" +
+                "amount='" + amount + '\'' +
+                ", description='" + description + '\'' +
+                ", payment_id='" + payment_id + '\'' +
+                ", author_id='" + author.getId() + '\'' +
+                ", resolver_id='" + resolver.getId() + '\'' +
+                ", type='" + type.getId() + '\'' +
+                ", status='" + status.getId() + '\'' +
+                ", submitted='" + submitted + '\'' +
+                '}';
     }
 
 }
