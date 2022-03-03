@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet("/foundations-project") // Annotation-based declarative registration (dependency wiring does not work!)
+@WebServlet("/test") // Annotation-based declarative registration (dependency wiring does not work!)
 public class TestServlet extends HttpServlet {
 
     @Override

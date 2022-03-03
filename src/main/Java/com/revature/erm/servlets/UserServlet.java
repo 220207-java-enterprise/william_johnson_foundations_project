@@ -22,7 +22,6 @@ import java.util.List;
 
 public class UserServlet extends HttpServlet {
 
-
     private final UserService userService;
     private final ObjectMapper mapper;
 
@@ -79,6 +78,7 @@ public class UserServlet extends HttpServlet {
             respWriter.write(payload);
 
         } catch (InvalidRequestException | DatabindException e) {
+            e.printStackTrace();
             resp.setStatus(400); // BAD REQUEST
         } catch (ResourceConflictException e) {
             resp.setStatus(409); // CONFLICT

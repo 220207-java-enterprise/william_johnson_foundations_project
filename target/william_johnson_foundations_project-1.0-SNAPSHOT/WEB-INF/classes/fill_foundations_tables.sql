@@ -7,10 +7,10 @@ insert into "ers_user_roles"("role_id", "role")
 
 select * from "ers_user_roles";
 
-insert into "ers_users"("user_id", "username", "email", "password", "given_name", "surname", "is_active", "role_id")
+insert into "ers_users"("user_id", "username", "email", "password", "first_name", "last_name", "is_active", "role_id")
 				values (gen_random_uuid(), 'iamtheadmin', 'admin@gmail.com', 'password', 'Bob', 'Samolian', true, '0');
 
-insert into "ers_users"("user_id", "username", "email", "password", "given_name", "surname", "is_active", "role_id")
+insert into "ers_users"("user_id", "username", "email", "password", "first_name", "last_name", "is_active", "role_id")
 				values (gen_random_uuid(), 'finance_manager_1', 'financier@gmail.com', 'fin_password', 'Bill', 'Anderson', true, '1'),
 					   (gen_random_uuid(), 'employee_1', 'an_employee@gmail.com', 'emp_password', 'Phil', 'Jones', true, '2'),
 					   (gen_random_uuid(), 'new_employee', 'new_employee@gmail.com', 'new_password', 'Jim', 'Stark', false, '2'),

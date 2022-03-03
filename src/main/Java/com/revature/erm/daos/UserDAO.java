@@ -17,10 +17,10 @@ import java.util.List;
 public class UserDAO implements CrudDAO<User> {
 
     private final String rootSelect = "SELECT " +
-            "eu.id, eu.first_name, eu.last_name, eu.email, eu.username, eu.password, eu.role, eur.role_name " +
+            "eu.user_id, eu.username, eu.email, eu.password, eu.first_name, eu.last_name, eu.is_active, eu.role_id, eur.role " +
             "FROM ers_users eu " +
             "JOIN ers_user_roles eur " +
-            "ON eu.role_id = eur.id ";
+            "ON eu.role_id = eur.role_id ";
 
     public User findUserByUsername(String username) {
 
@@ -34,13 +34,13 @@ public class UserDAO implements CrudDAO<User> {
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 user = new User();
-                user.setId(rs.getString("id"));
+                user.setId(rs.getString("user_id"));
                 user.setFirstName(rs.getString("first_name"));
                 user.setLastName(rs.getString("last_name"));
                 user.setEmail(rs.getString("email"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
-                user.setRole(new UserRole(rs.getString("role"), rs.getString("role_name")));
+                user.setRole(new UserRole(rs.getString("role_id"), rs.getString("role")));
             }
 
         } catch (SQLException e) {
@@ -62,13 +62,13 @@ public class UserDAO implements CrudDAO<User> {
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 user = new User();
-                user.setId(rs.getString("id"));
+                user.setId(rs.getString("user_id"));
                 user.setFirstName(rs.getString("first_name"));
                 user.setLastName(rs.getString("last_name"));
                 user.setEmail(rs.getString("email"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
-                user.setRole(new UserRole(rs.getString("role"), rs.getString("role_name")));
+                user.setRole(new UserRole(rs.getString("role_id"), rs.getString("role")));
             }
 
         } catch (SQLException e) {
@@ -81,24 +81,36 @@ public class UserDAO implements CrudDAO<User> {
 
     public User findUserByUsernameAndPassword(String username, String password) {
 
+        System.out.println("Printing at beginning of findUserByUsernameAndPassword");
         User authUser = null;
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            PreparedStatement pstmt = conn.prepareStatement(rootSelect + "WHERE username = ? AND password = ?");
+            PreparedStatement pstmt = conn.prepareStatement(rootSelect + "WHERE eu.username = ? AND eu.password = ?");
             pstmt.setString(1, username);
             pstmt.setString(2, password);
 
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 authUser = new User();
-                authUser.setId(rs.getString("id"));
-                authUser.setFirstName(rs.getString("first_name"));
-                authUser.setLastName(rs.getString("last_name"));
-                authUser.setEmail(rs.getString("email"));
+                System.out.println("is it here?");
+                authUser.setId(rs.getString("user_id"));
+                System.out.println("or here?");
                 authUser.setUsername(rs.getString("username"));
+                System.out.println("username");
+                authUser.setEmail(rs.getString("email"));
+                System.out.println("email");
                 authUser.setPassword(rs.getString("password"));
-                authUser.setRole(new UserRole(rs.getString("role"), rs.getString("role_name")));
+                System.out.println("password");
+                authUser.setFirstName(rs.getString("first_name"));
+                System.out.println("firstname");
+                authUser.setLastName(rs.getString("last_name"));
+                System.out.println("lastname");
+                authUser.setIsActive(rs.getBoolean("is_active"));
+                System.out.println("is_active");
+                System.out.println("rs.getstring() returns: " + rs.getString("role"));
+                authUser.setRole(new UserRole(rs.getString("role_id"), rs.getString("role")));
+                System.out.println("it all works");
             }
 
         } catch (SQLException e) {
@@ -114,14 +126,15 @@ public class UserDAO implements CrudDAO<User> {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             conn.setAutoCommit(false);
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO app_users VALUES (?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO ers_users VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             pstmt.setString(1, newUser.getId());
-            pstmt.setString(2, newUser.getFirstName());
-            pstmt.setString(3, newUser.getLastName());
-            pstmt.setString(4, newUser.getEmail());
-            pstmt.setString(5, newUser.getUsername());
-            pstmt.setString(6, newUser.getPassword());
-            pstmt.setString(7, newUser.getRole().getId());
+            pstmt.setString(2, newUser.getUsername());
+            pstmt.setString(3, newUser.getEmail());
+            pstmt.setString(4, newUser.getPassword());
+            pstmt.setString(5, newUser.getFirstName());
+            pstmt.setString(6, newUser.getLastName());
+            pstmt.setBoolean(7, newUser.isActive());
+            pstmt.setString(8, newUser.getRole().getId());
 
             int rowsInserted = pstmt.executeUpdate();
             if (rowsInserted != 1) {
@@ -143,19 +156,19 @@ public class UserDAO implements CrudDAO<User> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            PreparedStatement pstmt = conn.prepareStatement(rootSelect + "WHERE id = ?");
+            PreparedStatement pstmt = conn.prepareStatement(rootSelect + "WHERE user_id = ?");
             pstmt.setString(1, id);
 
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 user = new User();
-                user.setId(rs.getString("id"));
+                user.setId(rs.getString("user_id"));
                 user.setFirstName(rs.getString("first_name"));
                 user.setLastName(rs.getString("last_name"));
                 user.setEmail(rs.getString("email"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
-                user.setRole(new UserRole(rs.getString("role"), rs.getString("role_name")));
+                user.setRole(new UserRole(rs.getString("role_id"), rs.getString("role")));
             }
 
         } catch (SQLException e) {
@@ -176,13 +189,13 @@ public class UserDAO implements CrudDAO<User> {
             ResultSet rs = conn.createStatement().executeQuery(rootSelect);
             while (rs.next()) {
                 User user = new User();
-                user.setId(rs.getString("id"));
+                user.setId(rs.getString("user_id"));
                 user.setFirstName(rs.getString("first_name"));
                 user.setLastName(rs.getString("last_name"));
                 user.setEmail(rs.getString("email"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
-                user.setRole(new UserRole(rs.getString("role"), rs.getString("role_name")));
+                user.setRole(new UserRole(rs.getString("role_id"), rs.getString("role")));
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -197,13 +210,13 @@ public class UserDAO implements CrudDAO<User> {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             conn.setAutoCommit(false);
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE app_users " +
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE ers_users " +
                     "SET first_name = ?, " +
                     "last_name = ?, " +
                     "email = ?, " +
                     "username = ?, " +
                     "password = ? " +
-                    "WHERE id = ?");
+                    "WHERE role_id = ?");
             pstmt.setString(1, updatedUser.getFirstName());
             pstmt.setString(2, updatedUser.getLastName());
             pstmt.setString(3, updatedUser.getEmail());

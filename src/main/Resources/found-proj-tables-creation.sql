@@ -22,8 +22,8 @@ create table ers_users(
 	username 	varchar unique not null,
 	email 		varchar unique not null,
 	password 	varchar not null,
-	given_name 	varchar not null,
-	surname 	varchar not null,
+	first_name 	varchar not null,
+	last_name 	varchar not null,
 	is_active 	boolean,
 	role_id 	varchar,
 	

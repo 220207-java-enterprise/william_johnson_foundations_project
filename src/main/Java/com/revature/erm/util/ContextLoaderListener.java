@@ -24,10 +24,13 @@ public class ContextLoaderListener implements ServletContextListener {
         UserService userService = new UserService(userDAO);
         UserServlet userServlet = new UserServlet(userService, mapper);
         AuthServlet authServlet = new AuthServlet(userService, mapper);
+        // TODO instantiate the ReimbursementServlet and wire all of its dependencies
 
+        // TODO register the ReimbursementServlet to handle requests to /reimbursements
         // Programmatic Servlet Registration
         ServletContext context = sce.getServletContext();
         context.addServlet("UserServlet", userServlet).addMapping("/users/*");
+        context.addServlet("ReimbursementServlet", userServlet).addMapping("/reimbursements/*");
         context.addServlet("AuthServlet", authServlet).addMapping("/auth");
 
     }

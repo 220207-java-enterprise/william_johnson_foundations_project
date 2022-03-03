@@ -1,16 +1,18 @@
 package com.revature.erm.dtos.requests;
 
+import com.revature.erm.models.Reimbursement;
 import com.revature.erm.models.ReimbursementStatus;
 import com.revature.erm.models.ReimbursementType;
 import com.revature.erm.models.User;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class NewReimbursementRequest {
 
     //private String id;
     private double amount;
-    private LocalDateTime submitted;
+    private Timestamp submitted;
     //private LocalDateTime resolved;
     private String description;
     private String payment_id;
@@ -27,11 +29,11 @@ public class NewReimbursementRequest {
         this.amount = amount;
     }
 
-    public LocalDateTime getSubmitted() {
+    public Timestamp getSubmitted() {
         return submitted;
     }
 
-    public void setSubmitted(LocalDateTime submitted) {
+    public void setSubmitted(Timestamp submitted) {
         this.submitted = submitted;
     }
 
@@ -83,6 +85,10 @@ public class NewReimbursementRequest {
         this.type = type;
     }
 
+    public Reimbursement extractReimbursement() { return new Reimbursement(amount, submitted, description, author,  type); }
+
+    public boolean isAuthorActive(Reimbursement reimbursement) { return reimbursement.getAuthor().isActive(); }
+
     public NewReimbursementRequest(double amount, String description, String payment_id,
                                    User author, User resolver, ReimbursementType type){
 
@@ -93,7 +99,7 @@ public class NewReimbursementRequest {
         this.resolver = resolver;
         this.type = type;
         this.status = new ReimbursementStatus();
-        this.submitted = LocalDateTime.now();
+        //this.submitted = Timestamp.;
 
     }
 

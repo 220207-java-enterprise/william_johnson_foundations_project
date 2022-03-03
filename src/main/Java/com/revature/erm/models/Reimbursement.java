@@ -1,12 +1,14 @@
 package com.revature.erm.models;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Reimbursement {
     private String id;
     private double amount;
-    private LocalDateTime submitted;
-    private LocalDateTime resolved;
+    private Timestamp submitted;
+    private Timestamp resolved;
     private String description;
     private String payment_id;
     private User author;
@@ -30,19 +32,19 @@ public class Reimbursement {
         this.amount = amount;
     }
 
-    public LocalDateTime getSubmitted() {
+    public Timestamp getSubmitted() {
         return submitted;
     }
 
-    public void setSubmitted(LocalDateTime submitted) {
+    public void setSubmitted(Timestamp submitted) {
         this.submitted = submitted;
     }
 
-    public LocalDateTime getResolved() {
+    public Timestamp getResolved() {
         return resolved;
     }
 
-    public void setResolved(LocalDateTime resolved) {
+    public void setResolved(Timestamp resolved) {
         this.resolved = resolved;
     }
 
@@ -94,19 +96,26 @@ public class Reimbursement {
         this.type = type;
     }
 
-    Reimbursement(String id, int amount, LocalDateTime submitted, LocalDateTime resolved, String description,
+    Reimbursement(String id, int amount, Timestamp submitted, Timestamp resolved, String description,
                   String payment_id, User author, User resolver, ReimbursementStatus status, ReimbursementType type) {
-        this.id = id;
+        //this.id = id;
         this.amount = amount;
         this.submitted = submitted;
-        this.resolved = resolved;
+        //this.resolved = resolved;
         this.description = description;
-        this.payment_id = payment_id;
+        //this.payment_id = payment_id;
         this.author = author;
-        this.resolver = resolver;
+        //this.resolver = resolver;
         this.status = status;
         this.type = type;
 
+    }
+    public Reimbursement(double amount, Timestamp submitted, String description, User author, ReimbursementType type) {
+        this.amount = amount;
+        this.submitted = submitted;
+        this.description = description;
+        this.author = author;
+        this.type = type;
     }
 
 }

@@ -64,8 +64,8 @@ public class User {
         return isActive;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setIsActive(boolean active) {
+        this.isActive = active;
     }
 
     public UserRole getRole() {
