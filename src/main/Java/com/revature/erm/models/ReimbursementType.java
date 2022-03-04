@@ -4,6 +4,7 @@ public class ReimbursementType {
     private String id;
     private String type;
 
+
     public String getId() {
         return id;
     }
@@ -20,7 +21,7 @@ public class ReimbursementType {
         this.type = type;
     }
 
-    public void ReimbursementType(String id, String type) {
+    public ReimbursementType(String id, String type) {
         this.id = id;
         this.type = type;
     };

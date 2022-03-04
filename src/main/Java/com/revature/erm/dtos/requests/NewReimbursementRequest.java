@@ -11,21 +11,23 @@ import java.time.LocalDateTime;
 public class NewReimbursementRequest {
 
     //private String id;
-    private double amount;
+    private int amount;
     private Timestamp submitted;
     //private LocalDateTime resolved;
     private String description;
-    private String payment_id;
+    private String payment_id = null;
     private User author;
-    private User resolver;
+    private User resolver = null;
     private ReimbursementStatus status;
     private ReimbursementType type;
+
+    public NewReimbursementRequest(){ super(); }
 
     public double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
@@ -85,20 +87,20 @@ public class NewReimbursementRequest {
         this.type = type;
     }
 
-    public Reimbursement extractReimbursement() { return new Reimbursement(amount, submitted, description, author,  type); }
+    public Reimbursement extractReimbursement() { return new Reimbursement(amount, description/*, submitted,author, type*/); }
 
     public boolean isAuthorActive(Reimbursement reimbursement) { return reimbursement.getAuthor().isActive(); }
 
-    public NewReimbursementRequest(double amount, String description, String payment_id,
+    public NewReimbursementRequest(int amount, String description, String payment_id,
                                    User author, User resolver, ReimbursementType type){
 
         this.amount = amount;
         this.description = description;
-        this.payment_id = payment_id;
-        this.author = author;
-        this.resolver = resolver;
-        this.type = type;
-        this.status = new ReimbursementStatus();
+        //this.payment_id = payment_id;
+        //this.author = author;
+        //this.resolver = resolver;
+        //this.type = type;
+        //this.status = new ReimbursementStatus();
         //this.submitted = Timestamp.;
 
     }

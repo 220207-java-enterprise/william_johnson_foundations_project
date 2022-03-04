@@ -25,24 +25,28 @@ public class ReimbursementDAO implements CrudDAO<Reimbursement> {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             conn.setAutoCommit(false);
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO ers_users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO ers_reimbursments VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             pstmt.setString(1, newReimbursement.getId());
-            pstmt.setDouble(2, newReimbursement.getAmount());
+            pstmt.setInt(2, newReimbursement.getAmount());
             pstmt.setTimestamp(3, newReimbursement.getSubmitted());
             pstmt.setTimestamp(4, newReimbursement.getResolved());
             pstmt.setString(5, newReimbursement.getDescription());
             pstmt.setString(6, newReimbursement.getPayment_id());
             pstmt.setString(7, newReimbursement.getAuthor().getId());
-            pstmt.setString(8, newReimbursement.getResolver().getId());
+            //if(newReimbursement.getResolver() != null)
+                pstmt.setString(8, newReimbursement.getResolver().getId());
+            //else
+                //pstmt.setString(8, null);
             pstmt.setString(9, newReimbursement.getStatus().getId());
             pstmt.setString(10, newReimbursement.getType().getId());
 
-
+            System.out.println(pstmt);
 
             int rowsInserted = pstmt.executeUpdate();
+            System.out.println("pstmt.executeUpdate() ran in ReimbursementDao.java?");
             if (rowsInserted != 1) {
                 conn.rollback();
-                throw new ResourcePersistenceException("Failed to persist user to data source");
+                throw new ResourcePersistenceException("Failed to persist reimbursement to data source");
             }
 
             conn.commit();

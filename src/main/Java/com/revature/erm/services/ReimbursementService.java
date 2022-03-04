@@ -2,13 +2,14 @@ package com.revature.erm.services;
 
 import com.revature.erm.daos.ReimbursementDAO;
 import com.revature.erm.dtos.requests.NewReimbursementRequest;
+import com.revature.erm.dtos.requests.UpdateReimbursementRequest;
 import com.revature.erm.dtos.responses.ResourceCreationResponse;
-import com.revature.erm.models.Reimbursement;
-import com.revature.erm.models.User;
-import com.revature.erm.models.UserRole;
+import com.revature.erm.models.*;
 import com.revature.erm.util.exceptions.InvalidRequestException;
 import com.revature.erm.util.exceptions.ResourceConflictException;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,41 +17,52 @@ public class ReimbursementService {
 
     private ReimbursementDAO reimbursementDAO;
 
-    public ReimbursementService(ReimbursementDAO reimbursementDAO) {this.reimbursementDAO = reimbursementDAO;}
 
-    public List<Reimbursement> getReimbursementByAuthorId(String authorId){
-        return null;
-    }
+    public ReimbursementService(ReimbursementDAO reimbursementDAO) {this.reimbursementDAO = reimbursementDAO;}
 
     public List<Reimbursement> getReimbursementByStatusId(String statusId){
         return null;
     }
 
-    public ResourceCreationResponse saveNewReimbursment(NewReimbursementRequest newReimbursementRequest) {
+    public List<Reimbursement> getReimbursementByAuthorId(String authorId){
+
+        UpdateReimbursementRequest updateReimbursementRequest =
+        return null;
+    }
+
+    public Reimbursement submitNewReimbursment(NewReimbursementRequest newReimbursementRequest) {
+
+        System.out.println("beginning of submitNewReimbursement in ReimbursementService.java");
         Reimbursement newReimbursement = newReimbursementRequest.extractReimbursement();
 
+        // TODO encrypt provided password before storing in the database
+
+
+        System.out.println("setting up id w/uuid next in ReimbursementService.java");
+        newReimbursement.setId(UUID.randomUUID().toString());
+        System.out.println("setting author via hardcoding in ReimbursementService.java");
+        newReimbursement.setAuthor(new User("38a63ca8-f46d-4fc1-b1c7-b87863e82c9b", "bidol567",
+                "billy_idol@revature.com", "p4$$WoRD","Billy","Idol",
+                true, new UserRole("2", "Employee")));
+
+        System.out.println("testing is author is active in ReimbursementService.java");
         if (!newReimbursementRequest.isAuthorActive(newReimbursement)) {
             throw new InvalidRequestException("Author is not active");
         }
 
-        /*boolean usernameAvailable = isUsernameAvailable(newUser.getUsername());
-        boolean emailAvailable = isEmailAvailable(newUser.getEmail());
+        newReimbursement.setResolver(new User("ba2fa4f0-35cd-4522-8cb7-a4589f9bebe7", "finance_Manager",
+                "financier3@gmail.com", "pA$$W0rD","Billy","Crystal",
+                true, new UserRole("1", "Finance Manager")));
 
-        if (!usernameAvailable || !emailAvailable) {
-            String msg = "The values provided for the following fields are already taken by other users: ";
-            if (!usernameAvailable) msg += "username ";
-            if (!emailAvailable) msg += "email";
-            throw new ResourceConflictException(msg);
-        }*/
+        //newReimbursement.setId(UUID.randomUUID().toString());
 
-        // TODO encrypt provided password before storing in the database
-
-        newReimbursement.setId(UUID.randomUUID().toString());
-        //newReimbursement.setAuthor(new User("2", "Employee"));
+        newReimbursement.setType(new ReimbursementType("3", "Other"));
+        newReimbursement.setStatus(new ReimbursementStatus("0", "pending"));
+        newReimbursement.setSubmitted(Timestamp.valueOf(LocalDateTime.now()));
         //newUser.setIsActive(true);
         reimbursementDAO.save(newReimbursement);
 
-        return null;//newUser;
+        return newReimbursement;//newUser;
     }
 
     public boolean approveReimbursement(String reimbId) {

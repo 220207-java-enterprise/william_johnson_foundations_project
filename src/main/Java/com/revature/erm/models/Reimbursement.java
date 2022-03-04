@@ -6,13 +6,13 @@ import java.util.UUID;
 
 public class Reimbursement {
     private String id;
-    private double amount;
+    private int amount;
     private Timestamp submitted;
-    private Timestamp resolved;
+    private Timestamp resolved = null;
     private String description;
     private String payment_id;
     private User author;
-    private User resolver;
+    private User resolver = null;
     private ReimbursementStatus status;
     private ReimbursementType type;
 
@@ -24,11 +24,11 @@ public class Reimbursement {
         this.id = id;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
@@ -110,12 +110,12 @@ public class Reimbursement {
         this.type = type;
 
     }
-    public Reimbursement(double amount, Timestamp submitted, String description, User author, ReimbursementType type) {
+    public Reimbursement(int amount, String description/*, Timestamp submitted, User author, ReimbursementType type*/) {
         this.amount = amount;
-        this.submitted = submitted;
+        //this.submitted = submitted;
         this.description = description;
-        this.author = author;
-        this.type = type;
+        //this.author = author;
+        //this.type = type;
     }
 
 }
