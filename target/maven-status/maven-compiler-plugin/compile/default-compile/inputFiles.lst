@@ -19,6 +19,7 @@ C:\Users\wij20\Desktop\Revature\william_johnson_foundations_project\src\main\jav
 C:\Users\wij20\Desktop\Revature\william_johnson_foundations_project\src\main\java\com\revature\erm\util\exceptions\ResourceNotFoundException.java
 C:\Users\wij20\Desktop\Revature\william_johnson_foundations_project\src\main\java\com\revature\erm\dtos\responses\Principal.java
 C:\Users\wij20\Desktop\Revature\william_johnson_foundations_project\src\main\java\com\revature\erm\servlets\UserServlet.java
+C:\Users\wij20\Desktop\Revature\william_johnson_foundations_project\src\main\java\com\revature\erm\dtos\requests\ListUserReimbursementsRequest.java
 C:\Users\wij20\Desktop\Revature\william_johnson_foundations_project\src\main\java\com\revature\erm\dtos\responses\ResourceCreationResponse.java
 C:\Users\wij20\Desktop\Revature\william_johnson_foundations_project\src\main\java\com\revature\erm\daos\CrudDAO.java
 C:\Users\wij20\Desktop\Revature\william_johnson_foundations_project\src\main\java\com\revature\erm\util\exceptions\ResourceConflictException.java

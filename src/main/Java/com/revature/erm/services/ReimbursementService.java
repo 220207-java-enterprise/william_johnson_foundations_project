@@ -1,6 +1,7 @@
 package com.revature.erm.services;
 
 import com.revature.erm.daos.ReimbursementDAO;
+import com.revature.erm.dtos.requests.ListUserReimbursementsRequest;
 import com.revature.erm.dtos.requests.NewReimbursementRequest;
 import com.revature.erm.dtos.requests.UpdateReimbursementRequest;
 import com.revature.erm.dtos.responses.ResourceCreationResponse;
@@ -24,9 +25,15 @@ public class ReimbursementService {
         return null;
     }
 
-    public List<Reimbursement> getReimbursementByAuthorId(String authorId){
+    public List<Reimbursement> getReimbursementByAuthorId(ListUserReimbursementsRequest lrur) { //String authorId){
+        //todo extract author_id from listuserreimbursementsrequest
+        //todo verify the two ids
+        //todo implement getbyid in reimbursementdao
 
-        UpdateReimbursementRequest updateReimbursementRequest =
+        String author = lrur.getAuthorId();
+
+
+        //UpdateReimbursementRequest updateReimbursementRequest =
         return null;
     }
 
@@ -65,10 +72,22 @@ public class ReimbursementService {
         return newReimbursement;//newUser;
     }
 
-    public boolean approveReimbursement(String reimbId) {
-        return true;
+    public Boolean approveReimbursement(String reimbId) {
+        //Reimbursement newReimbursement = newReimbursementRequest.extractReimbursement();
+        try {
+            if (reimbId == "1")
+                return true;
+            else if (reimbId == "2")
+                return false;
+            else
+                throw new Exception();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("invalid user input");
+        }
+        return null;
     }
-
     public boolean denyReimbursement(String reimbId) {
         return false;
     }

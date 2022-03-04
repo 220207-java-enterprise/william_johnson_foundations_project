@@ -16,6 +16,8 @@ public class Reimbursement {
     private ReimbursementStatus status;
     private ReimbursementType type;
 
+    public Reimbursement() { super(); }
+
     public String getId() {
         return id;
     }
