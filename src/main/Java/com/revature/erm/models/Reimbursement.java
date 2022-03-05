@@ -11,8 +11,10 @@ public class Reimbursement {
     private Timestamp resolved = null;
     private String description;
     private String payment_id;
-    private User author;
-    private User resolver = null;
+    /*private User author;
+    private User resolver = null;*/
+    private String author_id;
+    private String resolver_id;
     private ReimbursementStatus status;
     private ReimbursementType type;
 
@@ -66,7 +68,7 @@ public class Reimbursement {
         this.payment_id = payment_id;
     }
 
-    public User getAuthor() {
+    /*public User getAuthor() {
         return author;
     }
 
@@ -80,6 +82,22 @@ public class Reimbursement {
 
     public void setResolver(User resolver) {
         this.resolver = resolver;
+    }*/
+
+    public String getAuthor_id() {
+        return author_id;
+    }
+
+    public void setAuthor_id(String author_id) {
+        this.author_id = author_id;
+    }
+
+    public String getResolver_id() {
+        return resolver_id;
+    }
+
+    public void setResolver_id(String resolver_id) {
+        this.resolver_id = resolver_id;
     }
 
     public ReimbursementStatus getStatus() {
@@ -99,14 +117,14 @@ public class Reimbursement {
     }
 
     Reimbursement(String id, int amount, Timestamp submitted, Timestamp resolved, String description,
-                  String payment_id, User author, User resolver, ReimbursementStatus status, ReimbursementType type) {
+                  String payment_id, String author, User resolver, ReimbursementStatus status, ReimbursementType type) {
         //this.id = id;
         this.amount = amount;
         this.submitted = submitted;
         //this.resolved = resolved;
         this.description = description;
         //this.payment_id = payment_id;
-        this.author = author;
+        this.author_id = author;
         //this.resolver = resolver;
         this.status = status;
         this.type = type;

@@ -40,9 +40,9 @@ public class ReimbursementDAO implements CrudDAO<Reimbursement> {
             pstmt.setTimestamp(4, newReimbursement.getResolved());
             pstmt.setString(5, newReimbursement.getDescription());
             pstmt.setString(6, newReimbursement.getPayment_id());
-            pstmt.setString(7, newReimbursement.getAuthor().getId());
+            pstmt.setString(7, newReimbursement.getAuthor_id());//.getId());
             //if(newReimbursement.getResolver() != null)
-                pstmt.setString(8, newReimbursement.getResolver().getId());
+                pstmt.setString(8, newReimbursement.getResolver_id());//.getId());
             //else
                 //pstmt.setString(8, null);
             pstmt.setString(9, newReimbursement.getStatus().getId());

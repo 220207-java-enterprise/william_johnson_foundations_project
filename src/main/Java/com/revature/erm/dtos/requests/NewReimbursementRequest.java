@@ -16,7 +16,8 @@ public class NewReimbursementRequest {
     //private LocalDateTime resolved;
     private String description;
     private String payment_id = null;
-    private User author;
+    //private User author;
+    private String author_id;
     private User resolver = null;
     private ReimbursementStatus status;
     private ReimbursementType type;
@@ -55,12 +56,12 @@ public class NewReimbursementRequest {
         this.payment_id = payment_id;
     }
 
-    public User getAuthor() {
-        return author;
+    public String getAuthorId() {
+        return author_id;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setAuthorId(String author) {
+        this.author_id = author;
     }
 
     public User getResolver() {
@@ -89,7 +90,7 @@ public class NewReimbursementRequest {
 
     public Reimbursement extractReimbursement() { return new Reimbursement(amount, description/*, submitted,author, type*/); }
 
-    public boolean isAuthorActive(Reimbursement reimbursement) { return reimbursement.getAuthor().isActive(); }
+    //public boolean isAuthorActive(Reimbursement reimbursement) { return reimbursement.getAuthor().isActive(); }
 
     public NewReimbursementRequest(int amount, String description, String payment_id,
                                    User author, User resolver, ReimbursementType type){
@@ -111,7 +112,7 @@ public class NewReimbursementRequest {
                 "amount='" + amount + '\'' +
                 ", description='" + description + '\'' +
                 ", payment_id='" + payment_id + '\'' +
-                ", author_id='" + author.getId() + '\'' +
+                ", author_id='" + author_id + '\'' + //.getId() + '\'' +
                 ", resolver_id='" + resolver.getId() + '\'' +
                 ", type='" + type.getId() + '\'' +
                 ", status='" + status.getId() + '\'' +
