@@ -7,23 +7,22 @@ import java.time.LocalDateTime;
 
 public class UpdateReimbursementRequest {
 
-    private User resolver;
-    private ReimbursementStatus status;
-    private LocalDateTime resolved;
+    private String id;
+    private String status_id;
 
-    public User getResolver() {
-        return resolver;
+    public String getId() {
+        return id;
     }
 
-    public void setResolver(User resolver) {
-        this.resolver = resolver;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public ReimbursementStatus getStatus() {
-        return status;
+    public String getStatus_id() {
+        return status_id;
     }
 
-    public void setStatus(ReimbursementStatus status) {
-        this.status = status;
+    public void setStatus_id(String status_id) {
+        this.status_id = status_id;
     }
 }

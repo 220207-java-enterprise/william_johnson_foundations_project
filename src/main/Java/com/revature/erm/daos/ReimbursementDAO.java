@@ -114,25 +114,14 @@ public class ReimbursementDAO implements CrudDAO<Reimbursement> {
                 reimbursement.setStatus_id(rs.getString("status_id"));
                 reimbursement.setType_id(rs.getString("type_id"));
                 allMatchingReimbursements.add(reimbursement);
-                /*matchingReimbursement= new Reimbursement();
-                //authUser.setId(rs.getString("user_id"));
-                matchingReimbursement.setId(rs.getString("reimb_id"));
-                matchingReimbursement.setAmount(rs.getInt("amount"));
-                matchingReimbursement.setSubmitted(rs.getTimestamp("submitted"));
-                matchingReimbursement.setResolved(rs.getTimestamp("resolved"));
-                matchingReimbursement.setDescription(rs.getString("description"));
-                matchingReimbursement.setPayment_id(rs.getString("payment_id"));*/
-                //matchingReimbursement.setAuthor(new User(rs.getString("author_id"), rs.getString("SELECT username FROM ers_users WHERE user_id = author_id")));
+
             }
             return allMatchingReimbursements;
 
         } catch (SQLException e) {
             throw new DataSourceException(e);
         }
-        //;return null;
     }
-
-    // get reimbs by status id
 
     public List<Reimbursement> getAll() {
         return null;

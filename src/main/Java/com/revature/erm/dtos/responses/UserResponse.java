@@ -19,7 +19,7 @@ public class UserResponse {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.username = user.getUsername();
-        this.role = user.getRole().getRoleName();
+        this.role = user.getRole_id();//.getRoleName();
     }
 
     public String getId() {

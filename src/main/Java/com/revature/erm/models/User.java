@@ -10,7 +10,7 @@ public class User {
     private String firstName;
     private String lastName;
     private boolean isActive;
-    private UserRole role;
+    private String role;
 
     public String getId() {
         return id;
@@ -68,11 +68,11 @@ public class User {
         this.isActive = active;
     }
 
-    public UserRole getRole() {
+    public String getRole_id() {
         return role;
     }
 
-    public void setRole(UserRole role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
@@ -87,7 +87,7 @@ public class User {
         this.role = null;
     }
     public User(String id, String username, String email, String password,
-                String firstName, String lastName, boolean isActive, UserRole role) {
+                String firstName, String lastName, boolean isActive, String role) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -100,11 +100,12 @@ public class User {
         //System.out.println(this.id);
     }
 
-    public User(String firstName, String lastName, String email, String username, String password) {
+    public User(String firstName, String lastName, String email, String username, String password, String role_id) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = role_id;
     }
 }

@@ -62,7 +62,7 @@ public class UserService {
         // TODO encrypt provided password before storing in the database
 
         newUser.setId(UUID.randomUUID().toString());
-        newUser.setRole(new UserRole("2", "Employee"));
+        //newUser.setRole_id(//new UserRole("2", "Employee"));
         newUser.setIsActive(true); //TODO set this to false later so new users have to be approved by the admin, leave as is for now
         userDAO.save(newUser);
 

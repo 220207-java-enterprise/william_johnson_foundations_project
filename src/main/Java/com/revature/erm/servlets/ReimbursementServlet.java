@@ -26,7 +26,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReimbursementServlet extends HttpServlet{
+public class ReimbursementServlet extends HttpServlet {
 
     private final ReimbursementService reimbursementService;
     private final ObjectMapper mapper;
@@ -50,8 +50,7 @@ public class ReimbursementServlet extends HttpServlet{
                 System.out.println("doGet :  ReimbursementServlet session==null throws 401 error");
                 resp.setStatus(401);
                 return;
-            }
-            else {
+            } else {
                 System.out.println("doGet :   session!=null, doesn't throw exception");
                 System.out.println(session.getAttribute("authUser"));
                 String sessionUserId = parseSessionUserId(session);//pull id from the session so the authorId can match
@@ -62,15 +61,6 @@ public class ReimbursementServlet extends HttpServlet{
                 listUserReimbursementsRequest.setAuthorId(sessionUserId);
                 System.out.println("set listreimbursementsrequest author_id to sessionUserId");
 
-                /*NewReimbursementRequest newReimbursementRequest = mapper.readValue(req.getInputStream(), NewReimbursementRequest.class);
-                System.out.println("about to launch submitNewReimbursement in ReimbursementServlet.java");
-
-                newReimbursementRequest.setAuthorId(sessionUserId); //set authorId being pulled from the session
-                System.out.println("setAuthorId(sessionUserId) in reimbursementServlet has been called");
-                Reimbursement newReimbursement = reimbursementService.submitNewReimbursment(newReimbursementRequest);
-                resp.setStatus(201); // CREATED
-                resp.setContentType("application/json");
-                String payload = mapper.writeValueAsString(new ResourceCreationResponse(newReimbursement.getId()));*/
                 List<Reimbursement> reimbs = reimbursementService.getReimbursementByAuthorId(listUserReimbursementsRequest);
                 //todo ^^this variable might need to be reimbursementresponse instead of reimbursement
                 System.out.println("ran getReimbursementByAUthorId() successfully");
@@ -102,8 +92,7 @@ public class ReimbursementServlet extends HttpServlet{
                 System.out.println("doPost :  ReimbursementServlet session==null throws 401 error");
                 resp.setStatus(401);
                 return;
-            }
-            else {
+            } else {
                 System.out.println("doPost :  session!=null, doesn't throw exception");
                 System.out.println(session.getAttribute("authUser"));
                 String sessionUserId = parseSessionUserId(session);//pull id from the session so the authorId can match
@@ -137,19 +126,33 @@ public class ReimbursementServlet extends HttpServlet{
     public void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter respWriter = resp.getWriter();
 
-        /*try {
+        try {
 
-            //NewReimbursementRequest newReimbursementRequest = mapper.readValue(req.getInputStream(), NewReimbursementRequest.class);
-            //System.out.println("about to launch submitNewReimbursement in ReimbursementServlet.java");
-            //Reimbursement newReimbursement = reimbursementService.submitNewReimbursment(newReimbursementRequest);
-            //resp.setStatus(201); // CREATED
-            //resp.setContentType("application/json");
-            //String payload = mapper.writeValueAsString(new ResourceCreationResponse(newReimbursement.getId()));
-            //respWriter.write(payload);
+            HttpSession session = req.getSession(false);
+            if (session == null) {
+                System.out.println("doPost :  ReimbursementServlet session==null throws 401 error");
+                resp.setStatus(401);
+                return;
+            } else {
+                System.out.println("doPost :  session!=null, doesn't throw exception");
+                System.out.println(session.getAttribute("authUser"));
+                String sessionUserId = parseSessionUserId(session);//pull id from the session so the authorId can match
 
-            *//*String approveOrNot = mapper.readValue(req.getInputStream(), String.class);
-            boolean result = reimbursementService.approveReimbursement(approveOrNot);*//*
+                UpdateReimbursementRequest updateReimbursementRequest = mapper.readValue(req.getInputStream(), UpdateReimbursementRequest.class);
 
+
+
+                /*NewReimbursementRequest newReimbursementRequest = mapper.readValue(req.getInputStream(), NewReimbursementRequest.class);
+                System.out.println("about to launch submitNewReimbursement in ReimbursementServlet.java");
+
+                newReimbursementRequest.setAuthorId(sessionUserId); //set authorId being pulled from the session
+                System.out.println("setAuthorId(sessionUserId) in reimbursementServlet has been called");
+                Reimbursement newReimbursement = reimbursementService.submitNewReimbursment(newReimbursementRequest);
+                resp.setStatus(201); // CREATED
+                resp.setContentType("application/json");
+                String payload = mapper.writeValueAsString(new ResourceCreationResponse(newReimbursement.getId()));
+                respWriter.write(payload);*/
+            }
 
         } catch (InvalidRequestException | DatabindException e) {
             e.printStackTrace();
@@ -159,8 +162,11 @@ public class ReimbursementServlet extends HttpServlet{
         } catch (Exception e) {
             e.printStackTrace(); // include for debugging purposes; ideally log it to a file
             resp.setStatus(500);
-        }*/
+        }
+
     }
+
+
 
     public String parseSessionUserId(HttpSession session){
 
