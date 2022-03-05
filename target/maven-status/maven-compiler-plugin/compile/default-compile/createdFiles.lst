@@ -2,6 +2,7 @@ com\revature\erm\daos\UserRoleDAO.class
 com\revature\erm\services\UserService.class
 com\revature\erm\dtos\requests\NewReimbursementRequest.class
 com\revature\erm\util\exceptions\InvalidRequestException.class
+com\revature\erm\dtos\responses\ReimbursementResponse.class
 com\revature\erm\models\ReimbursementType.class
 com\revature\erm\servlets\UserServlet.class
 com\revature\erm\dtos\requests\UpdateReimbursementRequest.class

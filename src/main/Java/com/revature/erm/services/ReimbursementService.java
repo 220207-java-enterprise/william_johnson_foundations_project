@@ -8,9 +8,11 @@ import com.revature.erm.dtos.responses.ResourceCreationResponse;
 import com.revature.erm.models.*;
 import com.revature.erm.util.exceptions.InvalidRequestException;
 import com.revature.erm.util.exceptions.ResourceConflictException;
+import org.postgresql.util.ReaderInputStream;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,9 +34,10 @@ public class ReimbursementService {
 
         String author = lrur.getAuthorId();
 
+        List<Reimbursement> reimbursements = reimbursementDAO.getAllByAuthorId(author);//new ArrayList<>();
 
         //UpdateReimbursementRequest updateReimbursementRequest =
-        return null;
+        return reimbursements;
     }
 
     public Reimbursement submitNewReimbursment(NewReimbursementRequest newReimbursementRequest) {
@@ -64,8 +67,8 @@ public class ReimbursementService {
 
         //newReimbursement.setId(UUID.randomUUID().toString());
 
-        newReimbursement.setType(new ReimbursementType("3", "Other"));
-        newReimbursement.setStatus(new ReimbursementStatus("0", "pending"));
+        newReimbursement.setType_id("3");//setType(new ReimbursementType("3", "Other"));
+        newReimbursement.setStatus_id("0");//setStatus(new ReimbursementStatus("0", "pending"));
         newReimbursement.setSubmitted(Timestamp.valueOf(LocalDateTime.now()));
         //newUser.setIsActive(true);
         reimbursementDAO.save(newReimbursement);

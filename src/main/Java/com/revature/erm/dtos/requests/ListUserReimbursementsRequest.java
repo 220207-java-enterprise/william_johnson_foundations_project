@@ -8,8 +8,8 @@ public class ListUserReimbursementsRequest {
         return author_id;
     }
 
-    public void setAuthorId(String authorId) {
-        this.author_id = authorId;
+    public void setAuthorId(String author_id) {
+        this.author_id = author_id;
     }
 
     public ListUserReimbursementsRequest(){ super(); }

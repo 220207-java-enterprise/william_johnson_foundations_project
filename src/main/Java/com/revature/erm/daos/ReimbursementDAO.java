@@ -11,15 +11,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.*;
 
 public class ReimbursementDAO implements CrudDAO<Reimbursement> {
 
-    /*private final String rootSelect = "SELECT " +
-            "eu.user_id, eu.username, eu.email, eu.password, eu.first_name, eu.last_name, eu.is_active, eu.role_id, eur.role " +
-            "FROM ers_users eu " +
-            "JOIN ers_user_roles eur " +
-            "ON eu.role_id = eur.role_id ";*/
     /*private final String rootSelect = "SELECT " +
             "eu.user_id, eu.username, eu.email, eu.password, eu.first_name, eu.last_name, eu.is_active, eu.role_id, eur.role " +
             "FROM ers_users eu " +
@@ -45,8 +40,8 @@ public class ReimbursementDAO implements CrudDAO<Reimbursement> {
                 pstmt.setString(8, newReimbursement.getResolver_id());//.getId());
             //else
                 //pstmt.setString(8, null);
-            pstmt.setString(9, newReimbursement.getStatus().getId());
-            pstmt.setString(10, newReimbursement.getType().getId());
+            pstmt.setString(9, newReimbursement.getStatus_id());//getStatus().getId());
+            pstmt.setString(10, newReimbursement.getType_id());//getType().getId());
 
             System.out.println(pstmt);
 
@@ -93,6 +88,48 @@ public class ReimbursementDAO implements CrudDAO<Reimbursement> {
         }
 
         return null;
+    }
+
+    public List<Reimbursement> getAllByAuthorId(String author_id){
+
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            PreparedStatement pstmt = conn.prepareStatement(rootSelect + "WHERE author_id = ?");
+            pstmt.setString(1, author_id);
+
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Reimbursement> allMatchingReimbursements = new ArrayList<Reimbursement>();
+
+            while (rs.next()) {
+                Reimbursement reimbursement = new Reimbursement();
+                reimbursement.setId(rs.getString("reimb_id"));
+                reimbursement.setAmount(rs.getInt("amount"));
+                reimbursement.setSubmitted(rs.getTimestamp("submitted"));
+                reimbursement.setResolved(rs.getTimestamp("resolved"));
+                reimbursement.setDescription(rs.getString("description"));
+                reimbursement.setPayment_id(rs.getString("payment_id"));
+                reimbursement.setAuthor_id(rs.getString("author_id"));
+                reimbursement.setResolver_id(rs.getString("resolver_id"));
+                reimbursement.setStatus_id(rs.getString("status_id"));
+                reimbursement.setType_id(rs.getString("type_id"));
+                allMatchingReimbursements.add(reimbursement);
+                /*matchingReimbursement= new Reimbursement();
+                //authUser.setId(rs.getString("user_id"));
+                matchingReimbursement.setId(rs.getString("reimb_id"));
+                matchingReimbursement.setAmount(rs.getInt("amount"));
+                matchingReimbursement.setSubmitted(rs.getTimestamp("submitted"));
+                matchingReimbursement.setResolved(rs.getTimestamp("resolved"));
+                matchingReimbursement.setDescription(rs.getString("description"));
+                matchingReimbursement.setPayment_id(rs.getString("payment_id"));*/
+                //matchingReimbursement.setAuthor(new User(rs.getString("author_id"), rs.getString("SELECT username FROM ers_users WHERE user_id = author_id")));
+            }
+            return allMatchingReimbursements;
+
+        } catch (SQLException e) {
+            throw new DataSourceException(e);
+        }
+        //;return null;
     }
 
     // get reimbs by status id
