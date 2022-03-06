@@ -1,5 +1,6 @@
 package com.revature.erm.dtos.requests;
 
+import com.revature.erm.models.Reimbursement;
 import com.revature.erm.models.ReimbursementStatus;
 import com.revature.erm.models.User;
 
@@ -25,4 +26,7 @@ public class UpdateReimbursementRequest {
     public void setStatus_id(String status_id) {
         this.status_id = status_id;
     }
+
+    public Reimbursement extractReimbursement() { return new Reimbursement(id, status_id); }
+
 }

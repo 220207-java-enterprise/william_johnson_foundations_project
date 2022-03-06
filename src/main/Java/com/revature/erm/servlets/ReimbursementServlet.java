@@ -139,8 +139,13 @@ public class ReimbursementServlet extends HttpServlet {
                 String sessionUserId = parseSessionUserId(session);//pull id from the session so the authorId can match
 
                 UpdateReimbursementRequest updateReimbursementRequest = mapper.readValue(req.getInputStream(), UpdateReimbursementRequest.class);
+                System.out.println("data passed to updateReimbursementRequest");
+                Reimbursement updateThisReimbursement = reimbursementService.changeReimbursementStatus(updateReimbursementRequest);
+                System.out.println("changeReimbursementStatus has run successfully");
 
-
+                String payload = mapper.writeValueAsString(updateThisReimbursement);
+                resp.setContentType("application/json");
+                respWriter.write(payload);
 
                 /*NewReimbursementRequest newReimbursementRequest = mapper.readValue(req.getInputStream(), NewReimbursementRequest.class);
                 System.out.println("about to launch submitNewReimbursement in ReimbursementServlet.java");

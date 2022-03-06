@@ -156,4 +156,6 @@ public class Reimbursement {
         //this.type = type;
     }
 
+    public Reimbursement(String id, String status_id){ this.id = id; this.status_id = status_id; }
+
 }

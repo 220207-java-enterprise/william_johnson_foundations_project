@@ -76,6 +76,18 @@ public class ReimbursementService {
         return newReimbursement;//newUser;
     }
 
+    public Reimbursement changeReimbursementStatus(UpdateReimbursementRequest updateReimbursementRequest) {
+
+        System.out.println("start of changeReimbursementStatus() in ReimbursementService.java");
+        Reimbursement updateThisReimbursement = updateReimbursementRequest.extractReimbursement();
+        System.out.println("extracted reimbursement from request");
+        reimbursementDAO.update(updateThisReimbursement);
+        System.out.println("update from reimbursementDAO has been run");
+
+
+        return reimbursementDAO.getById(updateThisReimbursement.getId());
+    }
+
     public Boolean approveReimbursement(String reimbId) {
         //Reimbursement newReimbursement = newReimbursementRequest.extractReimbursement();
         try {

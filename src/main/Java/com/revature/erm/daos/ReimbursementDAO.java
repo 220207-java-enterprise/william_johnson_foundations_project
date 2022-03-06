@@ -1,16 +1,12 @@
 package com.revature.erm.daos;
 
 import com.revature.erm.models.Reimbursement;
-import com.revature.erm.models.User;
-import com.revature.erm.models.UserRole;
 import com.revature.erm.util.ConnectionFactory;
 import com.revature.erm.util.exceptions.DataSourceException;
 import com.revature.erm.util.exceptions.ResourcePersistenceException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class ReimbursementDAO implements CrudDAO<Reimbursement> {
@@ -78,9 +74,15 @@ public class ReimbursementDAO implements CrudDAO<Reimbursement> {
                 matchingReimbursement.setResolved(rs.getTimestamp("resolved"));
                 matchingReimbursement.setDescription(rs.getString("description"));
                 matchingReimbursement.setPayment_id(rs.getString("payment_id"));
+                matchingReimbursement.setStatus_id(rs.getString("status_id"));
+                matchingReimbursement.setResolver_id(rs.getString("resolver_id"));
+                matchingReimbursement.setType_id(rs.getString("type_id"));
+                matchingReimbursement.setAuthor_id(rs.getString("author_id"));
                 //todo figure out how to pull the ers_users table, ers_user_roles, and ers_reimbursments table in a single select statement
                 //matchingReimbursement.setAuthor(new User(rs.getString("author_id"), rs.getString("SELECT username FROM ers_users WHERE user_id = author_id")));
 
+                System.out.println("updated reimbursement found after update was made");
+                return matchingReimbursement;
             }
 
         } catch (SQLException e) {
@@ -128,8 +130,49 @@ public class ReimbursementDAO implements CrudDAO<Reimbursement> {
     }
 
     //todo just call the save function above instead of using this function
-    public void update(Reimbursement updatedObject) {
+    public void update(Reimbursement updateThisReimbursement) {
 
+        //Reimbursement temp = getById(updateThisReimbursement.getId());
+        //temp.setStatus_id(updateThisReimbursement.getStatus_id());
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            conn.setAutoCommit(false);
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE ers_reimbursments set status_id = ?, resolved = ? WHERE reimb_id = ?");
+            pstmt.setString(1, updateThisReimbursement.getStatus_id());
+            pstmt.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+            pstmt.setString(3, updateThisReimbursement.getId());
+
+            System.out.println("UPDATE command sent to database");
+            /*pstmt.setString(1, newReimbursement.getId());
+            pstmt.setInt(2, newReimbursement.getAmount());
+            pstmt.setTimestamp(3, newReimbursement.getSubmitted());
+            pstmt.setTimestamp(4, newReimbursement.getResolved());
+            pstmt.setString(5, newReimbursement.getDescription());
+            pstmt.setString(6, newReimbursement.getPayment_id());
+            pstmt.setString(7, newReimbursement.getAuthor_id());//.getId());
+            //if(newReimbursement.getResolver() != null)
+            pstmt.setString(8, newReimbursement.getResolver_id());//.getId());
+            //else
+            //pstmt.setString(8, null);
+            pstmt.setString(9, newReimbursement.getStatus_id());//getStatus().getId());
+            pstmt.setString(10, newReimbursement.getType_id());//getType().getId());
+
+            System.out.println(pstmt);*/
+
+            int rowsInserted = pstmt.executeUpdate();
+            System.out.println("pstmt.executeUpdate() ran in ReimbursementDao.java?");
+            if (rowsInserted != 1) {
+                conn.rollback();
+                throw new ResourcePersistenceException("Failed to persist reimbursement to data source");
+            }
+
+            conn.commit();
+
+        } catch (SQLException e) {
+            throw new DataSourceException(e);
+        }
+        //return temp;
     }
 
     public void deleteById(String id) {
